@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/cadms/ksnp-nf/nextflow_schema.json",
+    "title": "Resfinder pipeline parameters",
+    "description": "Nextflow pipeline to run Resfinder",
+    "type": "object",
+    "definitions": {
+        "required_parameters": {
+            "title": "Required Parameters",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "help_text": "",
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "mimetype": "text",
+                    "description": "Input folder containing fasta files or gzipped fasta files.",
+                    "fa_icon": "fas fa-file-alt",
+                    "header": "### Input directory or bucket location"
+                },
+                "output": {
+                    "type": "string",
+                    "description": "Results output directory",
+                    "fa_icon": "fas fa-file-archive",
+                    "header": "### Output dir or bucket"
+                }
+            }
+        },
+        "optional_parameters": {
+            "title": "Optional Parameters",
+            "type": "object",
+            "description": "Optional",
+            "default": "",
+            "properties": {
+                "gzip": {
+                    "type": "boolean",
+                    "description": "If set to true results will be gzipped for easy downloading. ",
+                    "fa_icon": "fas fa-file-archive"
+                },
+                "coverage": {
+                    "type": "number",
+                    "description": "Minimum (breadth-of) coverage of ResFinder within the range 0-1",
+                    "fa_icon": "fas fa-percent"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "Threshold for identity of ResFinder within the range 0-1.",
+                    "fa_icon": "fas fa-percent"
+                },
+                "aquired": {
+                    "type": "boolean",
+                    "description": "Run resfinder for acquired resistance genes ",
+                    "fa_icon": "fas fa-check",
+                    "default": true
+                },
+                "species": {
+                    "type": "string",
+                    "description": "Species of sample. Left blank unless using e.coli,s. enterica,c.coli, or c.jejuni",
+                    "fa_icon": "fas fa-bug"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/input_parameters"
+        },
+        {
+            "$ref": "#/definitions/optional_parameters"
+        }
+    ]
+  }
